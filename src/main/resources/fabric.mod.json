@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "sdsfabric",
+  "version": "${version}",
+  "name": "SooperDooperScooper",
+  "description": "The beloved Spigot plugin, now in mod form!",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/sdsfabric/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.fg83.sdsfabric.SDS"
+    ]
+  },
+  "mixins": [
+    "sdsfabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}

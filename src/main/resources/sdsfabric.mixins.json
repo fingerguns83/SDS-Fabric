@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.fg83.sdsfabric.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PiglinEntityInvoker",
+    "VillagerEntityMixin",
+    "VillagerEntityInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
