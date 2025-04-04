@@ -1,3 +1,4 @@
 accessWidener   v2  named
 accessible field net/minecraft/entity/passive/VillagerEntity levelUpTimer I
 accessible field net/minecraft/entity/passive/VillagerEntity levelingUp Z
+accessible method net/minecraft/entity/mob/PiglinEntity mobTick() V

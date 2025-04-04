@@ -18,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.NameTagItem;
 
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -27,7 +26,6 @@ import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -123,8 +121,7 @@ public class SDS implements ModInitializer {
                     server.execute(() -> {
                         if (config.NoAiPiglinsBarter) {
                             noAiPiglins.forEach(piglin -> {
-                                ServerWorld world = Objects.requireNonNull(piglin.getServer()).getWorld(piglin.getWorld().getRegistryKey());
-                                ((PiglinEntityInvoker) piglin).doMobTick(world); // Invoke mobTick on each Piglin
+                                ((PiglinEntityInvoker) piglin).doMobTick(); // Invoke mobTick on each Piglin
                             });
                         }
                     });
