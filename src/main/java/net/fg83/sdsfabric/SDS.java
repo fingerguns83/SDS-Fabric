@@ -18,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.NameTagItem;
 
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -57,14 +58,14 @@ public class SDS implements ModInitializer {
 
         // Register callback for entity interaction event
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (world.isClient()){
-                return ActionResult.PASS;
-            }
             if (hitResult == null) {
                 return ActionResult.PASS; // Pass if no hit result
             }
+            if (player instanceof ServerPlayerEntity serverPlayer) {
+                return attemptScoop(entity, serverPlayer.getStackInHand(hand), serverPlayer);
+            }
+            return ActionResult.PASS;
 
-            return attemptScoop(entity, player.getStackInHand(hand), player);
         });
 
         AtomicInteger tickCounter = new AtomicInteger(0);
@@ -139,8 +140,7 @@ public class SDS implements ModInitializer {
      * @param player   The player attempting the modification.
      * @return The result of the action, indicating success or failure.
      */
-    public ActionResult attemptScoop(Entity entity, ItemStack usedItem, PlayerEntity player) {
-
+    public ActionResult attemptScoop(Entity entity, ItemStack usedItem, ServerPlayerEntity player) {
         if (usedItem.getItem() instanceof NameTagItem) {
             boolean tagType;
 
