@@ -32,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SDS implements ModInitializer {
+
     SDSConfig config; // Configuration instance
 
     List<VillagerEntity> noAiVillagers = new ArrayList<>();
@@ -42,7 +43,6 @@ public class SDS implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
         ConfigManager.loadConfig(); // Load configuration
         config = ConfigManager.getConfig(); // Retrieve configuration
 
@@ -59,6 +59,9 @@ public class SDS implements ModInitializer {
 
         // Register callback for entity interaction event
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (world.isClient()){
+                return ActionResult.PASS;
+            }
             if (hitResult == null) {
                 return ActionResult.PASS; // Pass if no hit result
             }
